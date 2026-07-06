@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import CalendarPicker from './CalendarPicker';
+import { CalendarIcon } from './Icons';
 
 interface Props {
   date: string;
@@ -47,7 +48,7 @@ export default function DateNav({ date, onChange }: Props) {
 
         <button style={styles.labelBtn} onClick={() => setShowCalendar(true)}>
           <span style={styles.label}>{label}</span>
-          <span style={styles.calIcon}>📅</span>
+          <span style={styles.calIcon}><CalendarIcon size={16} /></span>
         </button>
 
         <button
@@ -76,32 +77,36 @@ const styles: Record<string, React.CSSProperties> = {
   nav: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '10px 16px',
-    borderBottom: '1px solid var(--border)',
-    background: 'var(--surface)',
+    justifyContent: 'center',
+    gap: '6px',
+    padding: '18px 48px 10px',
     flexShrink: 0,
   },
   arrow: {
-    fontSize: '24px',
-    color: 'var(--text-muted)',
-    padding: '4px 10px',
+    fontSize: '22px',
+    color: 'var(--text-low)',
+    padding: '4px 12px',
     lineHeight: 1,
+    transition: 'color .2s var(--ease)',
   },
   labelBtn: {
     display: 'flex',
     alignItems: 'center',
-    gap: '6px',
-    padding: '4px 8px',
-    borderRadius: 'var(--radius)',
+    gap: '8px',
+    padding: '4px 10px',
+    borderRadius: 'var(--r-chip)',
   },
   label: {
-    fontSize: '15px',
-    fontWeight: 600,
-    color: 'var(--text)',
+    // the screen's one human headline — serif for voice
+    fontFamily: 'var(--font-serif)',
+    fontSize: '26px',
+    fontWeight: 400,
+    lineHeight: 1.1,
+    color: 'var(--text-hi)',
   },
   calIcon: {
-    fontSize: '14px',
-    opacity: 0.6,
+    color: 'var(--text-low)',
+    display: 'flex',
+    alignItems: 'center',
   },
 };

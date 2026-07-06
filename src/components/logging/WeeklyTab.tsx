@@ -20,15 +20,15 @@ export default function WeeklyTab({ get, setValue, resetTab }: LogProps) {
                   onClick={() => setValue('weekly', item.id, !checked)}
                   style={{
                     ...styles.row,
-                    background: checked ? 'rgba(167,139,250,0.07)' : 'transparent',
+                    background: checked ? 'rgba(79,182,188,.08)' : 'transparent',
                   }}
                   aria-pressed={checked}
                 >
-                  <span style={{ ...styles.check, color: checked ? 'var(--purple)' : 'var(--border)', textShadow: checked ? 'var(--glow-purple)' : 'none' }}>
+                  <span style={{ ...styles.check, color: checked ? 'var(--teal)' : 'var(--text-low)'}}>
                     {checked ? '✓' : '○'}
                   </span>
                   <span style={styles.labelWrap}>
-                    <span style={{ color: checked ? 'var(--text)' : 'var(--text-muted)' }}>{item.label}</span>
+                    <span style={{ color: checked ? 'var(--text-hi)' : 'var(--text-mid)' }}>{item.label}</span>
                     {item.note && <span style={styles.note}>{item.note}</span>}
                   </span>
                 </button>
@@ -59,12 +59,13 @@ export default function WeeklyTab({ get, setValue, resetTab }: LogProps) {
 
 const styles: Record<string, React.CSSProperties> = {
   sectionTitle: {
+    fontFamily: 'var(--font-mono)',
     fontSize: '11px',
-    fontWeight: 700,
+    fontWeight: 500,
     textTransform: 'uppercase',
-    letterSpacing: '0.08em',
-    color: 'var(--text-muted)',
-    padding: '12px 16px 4px',
+    letterSpacing: '.12em',
+    color: 'var(--text-low)',
+    padding: '16px 16px 6px',
   },
   row: {
     display: 'flex',
@@ -72,7 +73,7 @@ const styles: Record<string, React.CSSProperties> = {
     gap: '12px',
     width: '100%',
     padding: '10px 16px',
-    borderRadius: 'var(--radius)',
+    borderRadius: 'var(--r-chip)',
     textAlign: 'left',
     border: 'none',
     transition: 'background 0.12s',
@@ -84,21 +85,21 @@ const styles: Record<string, React.CSSProperties> = {
     flexShrink: 0,
   },
   labelWrap: { display: 'flex', flexDirection: 'column', gap: '2px' },
-  note: { fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.4 },
+  note: { fontSize: '11px', color: 'var(--text-mid)', lineHeight: 1.4 },
   numRow: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '10px 16px',
   },
-  numLabel: { fontSize: '15px', color: 'var(--text-muted)' },
+  numLabel: { fontSize: '15px', color: 'var(--text-mid)' },
   resetBtn: {
     display: 'block',
     margin: '24px auto 0',
     padding: '8px 20px',
     fontSize: '12px',
-    color: 'var(--text-muted)',
-    border: '1px solid var(--border)',
-    borderRadius: 'var(--radius)',
+    color: 'var(--text-low)',
+    border: '1px solid var(--hairline)',
+    borderRadius: 'var(--r-pill)',
   },
 };

@@ -52,8 +52,7 @@ export default function NumericCell({ value, onChange, placeholder, style }: Pro
         width: '80px',
         padding: '5px 8px',
         textAlign: 'right',
-        borderColor: hasError ? 'var(--coral)' : undefined,
-        boxShadow: hasError ? '0 0 6px var(--coral)' : undefined,
+        borderColor: hasError ? 'var(--clay)' : undefined,
         ...style,
       }}
     />

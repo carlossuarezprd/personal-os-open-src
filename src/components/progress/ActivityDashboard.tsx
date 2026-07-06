@@ -9,7 +9,7 @@ type View = typeof VIEWS[number];
 export default function ActivityDashboard({ range }: { range: RangeWeeks }) {
   const { days, loading } = useDailyData();
   const [view, setView] = useState<View>('Steps');
-  if (loading) return <p style={{ color: 'var(--text-muted)' }}>Loading…</p>;
+  if (loading) return <p style={{ color: 'var(--text-mid)' }}>Loading…</p>;
 
   const weeks = filterWeeks(groupByWeek(days), range);
   if (weeks.length === 0) return noData();
@@ -29,7 +29,7 @@ export default function ActivityDashboard({ range }: { range: RangeWeeks }) {
     <div>
       <div style={styles.toggle}>
         {VIEWS.map(v => (
-          <button key={v} style={{ ...styles.toggleBtn, background: view === v ? 'var(--surface2)' : 'transparent', color: view === v ? 'var(--purple)' : 'var(--text-muted)' }} onClick={() => setView(v)}>{v}</button>
+          <button key={v} style={{ ...styles.toggleBtn, background: view === v ? 'var(--surface-2)' : 'transparent', color: view === v ? 'var(--text-hi)' : 'var(--text-low)' }} onClick={() => setView(v)}>{v}</button>
         ))}
       </div>
 
@@ -51,7 +51,7 @@ export default function ActivityDashboard({ range }: { range: RangeWeeks }) {
             <XAxis dataKey="label" {...axisProps} />
             <YAxis {...axisProps} allowDecimals={false} />
             <Tooltip content={<ChartTooltip unit=" days" />} />
-            <Line dataKey="strength" name="Strength" stroke="var(--purple)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+            <Line dataKey="strength" name="Strength" stroke="var(--teal)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
           </LineChart>
         </ChartCard>
       ))}
@@ -62,7 +62,7 @@ export default function ActivityDashboard({ range }: { range: RangeWeeks }) {
             <XAxis dataKey="label" {...axisProps} />
             <YAxis {...axisProps} allowDecimals={false} />
             <Tooltip content={<ChartTooltip unit=" days" />} />
-            <Line dataKey="sauna" name="Sauna" stroke="var(--coral)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+            <Line dataKey="sauna" name="Sauna" stroke="var(--clay)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
           </LineChart>
         </ChartCard>
       ))}
@@ -72,5 +72,5 @@ export default function ActivityDashboard({ range }: { range: RangeWeeks }) {
 
 const styles: Record<string, React.CSSProperties> = {
   toggle: { display: 'flex', gap: '6px', marginBottom: '12px' },
-  toggleBtn: { padding: '5px 14px', borderRadius: 'var(--radius)', fontSize: '13px', border: 'none', cursor: 'pointer', fontWeight: 600 },
+  toggleBtn: { padding: '5px 14px', borderRadius: 'var(--r-chip)', fontSize: '13px', border: 'none', cursor: 'pointer', fontWeight: 600 },
 };

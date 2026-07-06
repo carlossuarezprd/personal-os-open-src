@@ -22,7 +22,7 @@ function CustomDot(props: { cx?: number; cy?: number; payload?: Point }) {
   const { cx, cy, payload } = props;
   if (cx == null || cy == null || !payload) return null;
   const r = Math.max(4, Math.min(11, payload.reps * 1.1));
-  return <circle cx={cx} cy={cy} r={r} fill="var(--purple)" opacity={0.9} style={{ filter: 'drop-shadow(0 0 4px #39ff1488)' }} />;
+  return <circle cx={cx} cy={cy} r={r} fill="var(--teal)" opacity={0.9} style={{ filter: 'drop-shadow(0 0 4px #39ff1488)' }} />;
 }
 
 export default function ProgressionChart({ sets, primaryUnit }: Props) {
@@ -45,7 +45,7 @@ export default function ProgressionChart({ sets, primaryUnit }: Props) {
   }, [sets, primaryUnit]);
 
   if (points.length === 0) return (
-    <div style={{ padding: '20px', color: 'var(--text-muted)', textAlign: 'center', fontSize: '13px' }}>
+    <div style={{ padding: '20px', color: 'var(--text-mid)', textAlign: 'center', fontSize: '13px' }}>
       No history yet
     </div>
   );
@@ -57,9 +57,9 @@ export default function ProgressionChart({ sets, primaryUnit }: Props) {
     if (!active || !payload?.length) return null;
     const p = payload[0].payload;
     return (
-      <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '8px 12px', fontSize: '12px' }}>
-        <div style={{ color: 'var(--text-muted)' }}>{p.dateLabel}</div>
-        <div style={{ color: 'var(--cyan)', fontWeight: 700 }}>{p.weight}{primaryUnit} × {p.reps}</div>
+      <div style={{ background: 'var(--surface)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-chip)', padding: '8px 12px', fontSize: '12px' }}>
+        <div style={{ color: 'var(--text-mid)' }}>{p.dateLabel}</div>
+        <div style={{ color: 'var(--blue)', fontWeight: 700 }}>{p.weight}{primaryUnit} × {p.reps}</div>
       </div>
     );
   }
@@ -74,13 +74,13 @@ export default function ProgressionChart({ sets, primaryUnit }: Props) {
             scale="time"
             domain={[minDate - 86400000 * 2, maxDate + 86400000 * 2]}
             tickFormatter={v => new Date(v).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-            tick={{ fill: 'var(--text-muted)', fontSize: 11 }}
+            tick={{ fill: 'var(--text-mid)', fontSize: 11 }}
             tickLine={false}
             axisLine={false}
           />
           <YAxis
             dataKey="weight"
-            tick={{ fill: 'var(--text-muted)', fontSize: 11 }}
+            tick={{ fill: 'var(--text-mid)', fontSize: 11 }}
             tickLine={false}
             axisLine={false}
           />
@@ -89,7 +89,7 @@ export default function ProgressionChart({ sets, primaryUnit }: Props) {
           {/* Connecting line */}
           <Line
             dataKey="weight"
-            stroke="var(--purple)"
+            stroke="var(--teal)"
             strokeWidth={1.5}
             strokeOpacity={0.4}
             dot={false}

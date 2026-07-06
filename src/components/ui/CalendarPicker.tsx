@@ -103,10 +103,9 @@ export default function CalendarPicker({ selected, max, onSelect, onClose }: Pro
                 onClick={() => { onSelect(iso); onClose(); }}
                 style={{
                   ...styles.dayBtn,
-                  background: isSelected ? 'var(--purple)' : isToday ? 'var(--surface2)' : 'transparent',
-                  color: isSelected ? '#0a0a0c' : isFuture ? 'var(--border)' : 'var(--text)',
+                  background: isSelected ? 'var(--teal)' : isToday ? 'var(--surface-2)' : 'transparent',
+                  color: isSelected ? 'var(--bg-0)' : isFuture ? 'var(--hairline)' : 'var(--text-hi)',
                   fontWeight: isSelected || isToday ? 700 : 400,
-                  boxShadow: isSelected ? 'var(--glow-purple)' : 'none',
                   cursor: isFuture ? 'default' : 'pointer',
                 }}
               >
@@ -124,17 +123,17 @@ const styles: Record<string, React.CSSProperties> = {
   backdrop: {
     position: 'fixed',
     inset: 0,
-    background: '#0008',
+    background: 'rgba(8,9,11,.66)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
     zIndex: 300,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
   modal: {
-    background: 'var(--surface)',
-    border: '1px solid var(--border)',
-    borderRadius: 'var(--radius-lg)',
-    padding: '16px',
+    background: 'var(--bg-1)',
+    border: '1px solid var(--hairline)',
+    borderRadius: 'var(--r-hero)',
+    padding: '20px',
     width: '300px',
     userSelect: 'none',
   },
@@ -146,14 +145,14 @@ const styles: Record<string, React.CSSProperties> = {
   },
   navBtn: {
     fontSize: '22px',
-    color: 'var(--text-muted)',
+    color: 'var(--text-mid)',
     padding: '4px 10px',
     lineHeight: 1,
   },
   monthLabel: {
     fontWeight: 700,
     fontSize: '15px',
-    color: 'var(--text)',
+    color: 'var(--text-hi)',
   },
   grid: {
     display: 'grid',
@@ -164,7 +163,7 @@ const styles: Record<string, React.CSSProperties> = {
     textAlign: 'center',
     fontSize: '11px',
     fontWeight: 600,
-    color: 'var(--text-muted)',
+    color: 'var(--text-mid)',
     padding: '4px 0',
   },
   dayBtn: {

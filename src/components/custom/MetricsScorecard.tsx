@@ -84,7 +84,7 @@ function SortableRow({ row, editing, manageMode, hidden, onEdit, onSave, onToggl
         transform: CSS.Transform.toString(transform),
         transition,
         opacity: isDragging ? 0.5 : hidden ? 0.4 : 1,
-        background: isDragging ? 'var(--surface2)' : undefined,
+        background: isDragging ? 'var(--surface-2)' : undefined,
         zIndex: isDragging ? 10 : undefined,
         position: 'relative',
       }}
@@ -99,10 +99,10 @@ function SortableRow({ row, editing, manageMode, hidden, onEdit, onSave, onToggl
 
       <span style={styles.colLabel}>{label}</span>
 
-      <span style={{ ...styles.colAvg, color: onTrack === true ? 'var(--green)' : onTrack === false ? 'var(--coral)' : 'var(--text)' }}>
+      <span style={{ ...styles.colAvg, color: onTrack === true ? 'var(--green)' : onTrack === false ? 'var(--clay)' : 'var(--text-hi)' }}>
         {dispAvg}
         {avg != null && !isCount && n < 7 && (
-          <span style={{ color: 'var(--text-muted)', fontSize: 10, marginLeft: 4 }}>({n}d)</span>
+          <span style={{ color: 'var(--text-mid)', fontSize: 10, marginLeft: 4 }}>({n}d)</span>
         )}
       </span>
 
@@ -125,7 +125,7 @@ function SortableRow({ row, editing, manageMode, hidden, onEdit, onSave, onToggl
           <button style={styles.targetBtn} onClick={() => onEdit(id, String(threshold?.value ?? ''))}>
             {threshold
               ? (isCount ? `${threshold.value} days` : String(threshold.value))
-              : <span style={{ color: 'var(--text-muted)' }}>set</span>}
+              : <span style={{ color: 'var(--text-mid)' }}>set</span>}
           </button>
         )}
       </span>
@@ -133,7 +133,7 @@ function SortableRow({ row, editing, manageMode, hidden, onEdit, onSave, onToggl
       <span style={styles.colDir}>
         {threshold && !isCount && (
           <button
-            style={{ ...styles.dirBtn, color: threshold.direction === 'min' ? 'var(--cyan)' : 'var(--yellow)' }}
+            style={{ ...styles.dirBtn, color: threshold.direction === 'min' ? 'var(--blue)' : 'var(--amber)' }}
             onClick={() => onToggleDir(id, threshold)}
           >
             {threshold.direction === 'min' ? '≥' : '≤'}
@@ -153,7 +153,7 @@ function SortableRow({ row, editing, manageMode, hidden, onEdit, onSave, onToggl
         ) : (
           <>
             {onTrack === true  && <span style={{ color: 'var(--green)',  fontSize: 14 }}>✓</span>}
-            {onTrack === false && <span style={{ color: 'var(--coral)', fontSize: 14 }}>✗</span>}
+            {onTrack === false && <span style={{ color: 'var(--clay)', fontSize: 14 }}>✗</span>}
           </>
         )}
       </span>
@@ -262,7 +262,7 @@ export default function MetricsScorecard() {
     saveHidden(next);
   }
 
-  if (daysLoading || setLoading) return <p style={{ color: 'var(--text-muted)' }}>Loading…</p>;
+  if (daysLoading || setLoading) return <p style={{ color: 'var(--text-mid)' }}>Loading…</p>;
 
   return (
     <div>
@@ -270,8 +270,8 @@ export default function MetricsScorecard() {
       <div style={styles.weekNav}>
         <button style={styles.navBtn} onClick={() => setWeekStart(prev => addDays(prev, -7))}>‹</button>
         <div style={styles.weekLabel}>
-          <span style={{ color: 'var(--text)', fontWeight: 600 }}>{weekStart} – {weekEnd}</span>
-          {weekEnd >= today && <span style={{ color: 'var(--text-muted)', fontSize: 11, marginLeft: 6 }}>in progress · {loggedDays.length} days logged</span>}
+          <span style={{ color: 'var(--text-hi)', fontWeight: 600 }}>{weekStart} – {weekEnd}</span>
+          {weekEnd >= today && <span style={{ color: 'var(--text-mid)', fontSize: 11, marginLeft: 6 }}>in progress · {loggedDays.length} days logged</span>}
         </div>
         <button
           style={{ ...styles.navBtn, opacity: weekEnd >= today ? 0.3 : 1, cursor: weekEnd >= today ? 'default' : 'pointer' }}
@@ -282,13 +282,13 @@ export default function MetricsScorecard() {
       {/* Manage toggle */}
       <div style={styles.manageRow}>
         <button
-          style={{ ...styles.manageBtn, color: manageMode ? 'var(--purple)' : 'var(--text-muted)', borderColor: manageMode ? 'var(--purple)' : 'var(--border)' }}
+          style={{ ...styles.manageBtn, color: manageMode ? 'var(--text-hi)' : 'var(--text-low)', borderColor: manageMode ? 'var(--teal)' : 'var(--hairline)' }}
           onClick={() => setManageMode(m => !m)}
         >
           {manageMode ? 'Done' : 'Manage'}
         </button>
         {hidden.length > 0 && !manageMode && (
-          <span style={{ color: 'var(--text-muted)', fontSize: 11 }}>{hidden.length} hidden</span>
+          <span style={{ color: 'var(--text-mid)', fontSize: 11 }}>{hidden.length} hidden</span>
         )}
       </div>
 
@@ -322,7 +322,7 @@ export default function MetricsScorecard() {
         </DndContext>
       </div>
 
-      <p style={{ color: 'var(--text-muted)', fontSize: 11, marginTop: 12 }}>
+      <p style={{ color: 'var(--text-mid)', fontSize: 11, marginTop: 12 }}>
         Drag ⠿ to reorder · tap target to edit · tap ≥/≤ to flip direction
         {manageMode && ' · tap 👁/⊘ to show/hide'}
       </p>
@@ -332,21 +332,21 @@ export default function MetricsScorecard() {
 
 const styles: Record<string, React.CSSProperties> = {
   weekNav:   { display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 },
-  navBtn:    { width: 32, height: 32, borderRadius: 'var(--radius)', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text)', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  navBtn:    { width: 32, height: 32, borderRadius: 'var(--r-chip)', border: '1px solid var(--hairline)', background: 'var(--surface)', color: 'var(--text-hi)', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' },
   weekLabel: { flex: 1, textAlign: 'center', fontSize: 13 },
-  table:     { background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', overflow: 'hidden' },
-  row:       { display: 'grid', gridTemplateColumns: '20px 1fr 80px 72px 32px 24px', alignItems: 'center', padding: '9px 14px', borderBottom: '1px solid var(--border)' },
-  header:    { background: 'var(--surface2)', padding: '7px 14px' },
-  handle:    { color: 'var(--text-muted)', fontSize: 16, cursor: 'grab', touchAction: 'none', userSelect: 'none', lineHeight: 1 },
-  colLabel:  { fontSize: 13, color: 'var(--text)' },
+  table:     { background: 'var(--surface)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-card)', overflow: 'hidden' },
+  row:       { display: 'grid', gridTemplateColumns: '20px 1fr 80px 72px 32px 24px', alignItems: 'center', padding: '9px 14px', borderBottom: '1px solid var(--hairline)' },
+  header:    { background: 'var(--surface-2)', padding: '7px 14px' },
+  handle:    { color: 'var(--text-mid)', fontSize: 16, cursor: 'grab', touchAction: 'none', userSelect: 'none', lineHeight: 1 },
+  colLabel:  { fontSize: 13, color: 'var(--text-hi)' },
   colAvg:    { fontSize: 13, fontWeight: 600, textAlign: 'right' as const },
   colTarget: { fontSize: 13, textAlign: 'right' as const },
   colDir:    { fontSize: 14, textAlign: 'center' as const },
   colStatus: { fontSize: 14, textAlign: 'center' as const },
-  targetBtn: { background: 'none', border: 'none', cursor: 'pointer', color: 'var(--purple)', fontSize: 13, fontWeight: 600, padding: 0, textDecoration: 'underline dotted', width: '100%', textAlign: 'right' as const },
+  targetBtn: { background: 'none', border: 'none', cursor: 'pointer', color: 'var(--teal)', fontSize: 13, fontWeight: 600, padding: 0, textDecoration: 'underline dotted', width: '100%', textAlign: 'right' as const },
   dirBtn:    { background: 'none', border: 'none', cursor: 'pointer', fontSize: 15, fontWeight: 700, padding: 0 },
-  input:     { width: 60, background: 'var(--surface2)', border: '1px solid var(--purple)', borderRadius: 'var(--radius)', color: 'var(--text)', fontSize: 12, padding: '2px 4px', outline: 'none', textAlign: 'right' as const },
+  input:     { width: 60, background: 'var(--surface-2)', border: '1px solid var(--teal)', borderRadius: 'var(--r-chip)', color: 'var(--text-hi)', fontSize: 12, padding: '2px 4px', outline: 'none', textAlign: 'right' as const },
   manageRow: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 },
-  manageBtn: { background: 'var(--surface)', border: '1px solid', borderRadius: 'var(--radius)', padding: '4px 12px', fontSize: 12, fontWeight: 600, cursor: 'pointer' },
-  eyeBtn:    { background: 'none', border: 'none', cursor: 'pointer', fontSize: 14, padding: 0, color: 'var(--text-muted)' },
+  manageBtn: { background: 'var(--surface)', border: '1px solid', borderRadius: 'var(--r-chip)', padding: '4px 12px', fontSize: 12, fontWeight: 600, cursor: 'pointer' },
+  eyeBtn:    { background: 'none', border: 'none', cursor: 'pointer', fontSize: 14, padding: 0, color: 'var(--text-mid)' },
 };

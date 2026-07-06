@@ -41,16 +41,16 @@ function computedFields(log: ReturnType<typeof useDailyLog>['log']) {
 // ─── Computed display ──────────────────────────────────────────────────────
 
 function pct(v: number | null) {
-  if (v == null) return <span style={{ color: 'var(--text-muted)' }}>—</span>;
+  if (v == null) return <span style={{ color: 'var(--text-mid)' }}>—</span>;
   const rounded = Math.round(v);
-  return <span style={{ color: 'var(--cyan)', textShadow: 'var(--glow-cyan)' }}>{rounded}%</span>;
+  return <span style={{ color: 'var(--blue)'}}>{rounded}%</span>;
 }
 
 function cals(v: number | null, signed = false) {
-  if (v == null) return <span style={{ color: 'var(--text-muted)' }}>—</span>;
+  if (v == null) return <span style={{ color: 'var(--text-mid)' }}>—</span>;
   const rounded = Math.round(v);
   const display = signed ? (rounded >= 0 ? `+${rounded}` : `${rounded}`) : String(rounded);
-  return <span style={{ color: 'var(--cyan)', textShadow: 'var(--glow-cyan)' }}>{display} kcal</span>;
+  return <span style={{ color: 'var(--blue)'}}>{display} kcal</span>;
 }
 
 // ─── Component ────────────────────────────────────────────────────────────
@@ -117,12 +117,13 @@ export default function DailyTab({ get, setValue, resetTab, log }: LogProps) {
 
 const styles: Record<string, React.CSSProperties> = {
   sectionTitle: {
+    fontFamily: 'var(--font-mono)',
     fontSize: '11px',
-    fontWeight: 700,
+    fontWeight: 500,
     textTransform: 'uppercase',
-    letterSpacing: '0.08em',
-    color: 'var(--text-muted)',
-    padding: '12px 16px 4px',
+    letterSpacing: '.12em',
+    color: 'var(--text-low)',
+    padding: '16px 16px 6px',
   },
   numRow: {
     display: 'flex',
@@ -131,7 +132,7 @@ const styles: Record<string, React.CSSProperties> = {
     padding: '10px 16px',
     minHeight: '44px',
   },
-  numLabel: { fontSize: '15px', color: 'var(--text-muted)', flex: 1 },
+  numLabel: { fontSize: '15px', color: 'var(--text-mid)', flex: 1 },
   note: { fontSize: '11px' },
   computedValue: { fontSize: '15px', fontWeight: 600, minWidth: '80px', textAlign: 'right' },
   resetBtn: {
@@ -139,8 +140,8 @@ const styles: Record<string, React.CSSProperties> = {
     margin: '24px auto 0',
     padding: '8px 20px',
     fontSize: '12px',
-    color: 'var(--text-muted)',
-    border: '1px solid var(--border)',
-    borderRadius: 'var(--radius)',
+    color: 'var(--text-low)',
+    border: '1px solid var(--hairline)',
+    borderRadius: 'var(--r-pill)',
   },
 };

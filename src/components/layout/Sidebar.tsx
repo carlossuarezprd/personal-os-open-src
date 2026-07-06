@@ -1,31 +1,36 @@
 import { NavLink } from 'react-router-dom';
+import { CheckCircleIcon, DumbbellIcon, TrendIcon, HeartIcon, SlidersIcon } from '../ui/Icons';
 
 const navItems = [
-  { to: '/logging',   label: 'Tracker',       icon: '✓'  },
-  { to: '/training',  label: 'Training',      icon: '💪' },
-  { to: '/stats',     label: 'Stats',         icon: '📈' },
-  { to: '/health',    label: 'Health Center', icon: '🫀' },
-  { to: '/settings',  label: 'Settings',      icon: '⚙'  },
+  { to: '/logging',  label: 'Tracker',       Icon: CheckCircleIcon },
+  { to: '/training', label: 'Training',      Icon: DumbbellIcon },
+  { to: '/stats',    label: 'Stats',         Icon: TrendIcon },
+  { to: '/health',   label: 'Health Center', Icon: HeartIcon },
+  { to: '/settings', label: 'Settings',      Icon: SlidersIcon },
 ];
 
 export default function Sidebar() {
   return (
     <nav style={styles.sidebar}>
-      <div style={styles.logo}>Routine</div>
+      <div style={styles.wordmark}>
+        <span style={styles.dot} />
+        Routine
+      </div>
 
       <div style={styles.links}>
-        {navItems.map(item => (
+        {navItems.map(({ to, label, Icon }) => (
           <NavLink
-            key={item.to}
-            to={item.to}
+            key={to}
+            to={to}
             style={({ isActive }) => ({
               ...styles.link,
-              background: isActive ? 'var(--surface2)' : 'transparent',
-              color: isActive ? 'var(--purple)' : 'var(--text)',
+              background: isActive ? 'var(--surface)' : 'transparent',
+              borderColor: isActive ? 'var(--hairline)' : 'transparent',
+              color: isActive ? 'var(--text-hi)' : 'var(--text-low)',
             })}
           >
-            <span style={styles.icon}>{item.icon}</span>
-            {item.label}
+            <Icon size={20} />
+            {label}
           </NavLink>
         ))}
       </div>
@@ -37,8 +42,7 @@ const styles: Record<string, React.CSSProperties> = {
   sidebar: {
     width: 'var(--sidebar-w)',
     height: '100dvh',
-    background: 'var(--surface)',
-    borderRight: '1px solid var(--border)',
+    borderRight: '1px solid var(--hairline)',
     display: 'flex',
     flexDirection: 'column',
     position: 'fixed',
@@ -47,34 +51,43 @@ const styles: Record<string, React.CSSProperties> = {
     zIndex: 100,
     paddingTop: 'env(safe-area-inset-top)',
   },
-  logo: {
-    padding: '20px 20px 16px',
-    fontSize: '18px',
-    fontWeight: 700,
-    color: 'var(--purple)',
-    textShadow: 'var(--glow-purple)',
+  wordmark: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    padding: '28px 20px 24px',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '11px',
+    fontWeight: 500,
+    letterSpacing: '.2em',
+    textTransform: 'uppercase',
+    color: 'var(--text-hi)',
+  },
+  dot: {
+    width: '7px',
+    height: '7px',
+    borderRadius: '50%',
+    background: 'var(--green)',
+    boxShadow: '0 0 12px var(--green)',
+    flexShrink: 0,
   },
   links: {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    gap: '2px',
-    padding: '0 8px',
+    gap: '4px',
+    padding: '0 12px',
   },
   link: {
     display: 'flex',
     alignItems: 'center',
-    gap: '10px',
-    padding: '10px 12px',
-    borderRadius: 'var(--radius)',
+    gap: '12px',
+    padding: '10px 14px',
+    border: '1px solid transparent',
+    borderRadius: 'var(--r-chip)',
     textDecoration: 'none',
     fontSize: '14px',
     fontWeight: 500,
-    transition: 'background 0.1s, color 0.1s',
-  },
-  icon: {
-    fontSize: '16px',
-    width: '20px',
-    textAlign: 'center',
+    transition: 'background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease)',
   },
 };

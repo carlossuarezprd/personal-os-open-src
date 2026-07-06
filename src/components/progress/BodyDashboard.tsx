@@ -4,7 +4,7 @@ import { useDailyData, groupByWeek, filterWeeks, type RangeWeeks } from '../../h
 
 export default function BodyDashboard({ range }: { range: RangeWeeks }) {
   const { days, loading } = useDailyData();
-  if (loading) return <p style={{ color: 'var(--text-muted)' }}>Loading…</p>;
+  if (loading) return <p style={{ color: 'var(--text-mid)' }}>Loading…</p>;
 
   const weeks = filterWeeks(groupByWeek(days), range);
   if (weeks.length === 0) return noData();
@@ -26,7 +26,7 @@ export default function BodyDashboard({ range }: { range: RangeWeeks }) {
         <XAxis dataKey="label" {...axisProps} />
         <YAxis {...axisProps} unit="kg" domain={['auto', 'auto']} />
         <Tooltip content={<ChartTooltip unit="kg" />} />
-        <Line dataKey="weight" name="Weight" stroke="var(--cyan)" strokeWidth={2} dot={{ r: 3, fill: 'var(--cyan)' }} connectNulls />
+        <Line dataKey="weight" name="Weight" stroke="var(--blue)" strokeWidth={2} dot={{ r: 3, fill: 'var(--blue)' }} connectNulls />
       </LineChart>
     </ChartCard>
   );

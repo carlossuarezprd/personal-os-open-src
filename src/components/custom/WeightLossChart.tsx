@@ -38,8 +38,8 @@ export default function WeightLossChart() {
     });
   }, [days, range]);
 
-  if (loading) return <p style={{ color: 'var(--text-muted)' }}>Loading…</p>;
-  if (chartData.length === 0) return <p style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '20px 0' }}>No data yet</p>;
+  if (loading) return <p style={{ color: 'var(--text-mid)' }}>Loading…</p>;
+  if (chartData.length === 0) return <p style={{ color: 'var(--text-mid)', textAlign: 'center', padding: '20px 0' }}>No data yet</p>;
 
   // cum is signed: positive = surplus (gain), negative = deficit (loss)
   const totalKcal = chartData[chartData.length - 1]?.cum ?? 0;
@@ -57,21 +57,21 @@ export default function WeightLossChart() {
       {/* Running totals */}
       <div style={styles.statsRow}>
         <div style={styles.stat}>
-          <span style={{ color: totalKcal <= 0 ? 'var(--green)' : 'var(--coral)', fontWeight: 700, fontSize: 18 }}>
+          <span style={{ color: totalKcal <= 0 ? 'var(--green)' : 'var(--clay)', fontWeight: 700, fontSize: 18 }}>
             {totalKcal >= 0 ? '+' : ''}{totalKcal.toLocaleString()} kcal
           </span>
           <span style={styles.statLabel}>{totalKcal <= 0 ? 'deficit' : 'surplus'}</span>
         </div>
         <div style={styles.statDivider} />
         <div style={styles.stat}>
-          <span style={{ color: Number(lbsFat) <= 0 ? 'var(--green)' : 'var(--coral)', fontWeight: 600, fontSize: 16 }}>
+          <span style={{ color: Number(lbsFat) <= 0 ? 'var(--green)' : 'var(--clay)', fontWeight: 600, fontSize: 16 }}>
             {Number(lbsFat) >= 0 ? '+' : ''}{lbsFat} lbs
           </span>
           <span style={styles.statLabel}>fat</span>
         </div>
         <div style={styles.statDivider} />
         <div style={styles.stat}>
-          <span style={{ color: Number(kgFat) <= 0 ? 'var(--green)' : 'var(--coral)', fontWeight: 600, fontSize: 16 }}>
+          <span style={{ color: Number(kgFat) <= 0 ? 'var(--green)' : 'var(--clay)', fontWeight: 600, fontSize: 16 }}>
             {Number(kgFat) >= 0 ? '+' : ''}{kgFat} kg
           </span>
           <span style={styles.statLabel}>fat</span>
@@ -82,7 +82,7 @@ export default function WeightLossChart() {
         {RANGES.map(r => (
           <button
             key={String(r.value)}
-            style={{ ...styles.rangeBtn, background: range === r.value ? 'var(--surface2)' : 'transparent', color: range === r.value ? 'var(--purple)' : 'var(--text-muted)', fontWeight: range === r.value ? 700 : 400 }}
+            style={{ ...styles.rangeBtn, background: range === r.value ? 'var(--surface-2)' : 'transparent', color: range === r.value ? 'var(--text-hi)' : 'var(--text-low)', fontWeight: range === r.value ? 700 : 400 }}
             onClick={() => setRange(r.value)}
           >
             {r.label}
@@ -94,17 +94,17 @@ export default function WeightLossChart() {
         <AreaChart data={chartData} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
           <defs>
             <linearGradient id="weightGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset={zeroFraction} stopColor="var(--coral)" stopOpacity={0.45} />
+              <stop offset={zeroFraction} stopColor="var(--clay)" stopOpacity={0.45} />
               <stop offset={zeroFraction} stopColor="var(--green)" stopOpacity={0.45} />
             </linearGradient>
             <linearGradient id="weightStroke" x1="0" y1="0" x2="0" y2="1">
-              <stop offset={zeroFraction} stopColor="var(--coral)" stopOpacity={1} />
+              <stop offset={zeroFraction} stopColor="var(--clay)" stopOpacity={1} />
               <stop offset={zeroFraction} stopColor="var(--green)" stopOpacity={1} />
             </linearGradient>
           </defs>
           <XAxis dataKey="label" {...axisProps} interval="preserveStartEnd" />
           <YAxis {...axisProps} width={56} />
-          <ReferenceLine y={0} stroke="var(--border)" strokeDasharray="4 3" />
+          <ReferenceLine y={0} stroke="var(--hairline)" strokeDasharray="4 3" />
           <Tooltip
             content={({ active, payload }) => {
               if (!active || !payload?.length) return null;
@@ -112,13 +112,13 @@ export default function WeightLossChart() {
               const cumIsLoss = d.cum <= 0;
               const dailyIsLoss = (d.daily ?? 0) <= 0;
               return (
-                <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '8px 12px', fontSize: 12 }}>
-                  <div style={{ color: 'var(--text-muted)', marginBottom: 4 }}>{d.date}</div>
-                  <div style={{ color: cumIsLoss ? 'var(--green)' : 'var(--coral)', fontWeight: 600 }}>
+                <div style={{ background: 'var(--surface)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-chip)', padding: '8px 12px', fontSize: 12 }}>
+                  <div style={{ color: 'var(--text-mid)', marginBottom: 4 }}>{d.date}</div>
+                  <div style={{ color: cumIsLoss ? 'var(--green)' : 'var(--clay)', fontWeight: 600 }}>
                     {d.cum >= 0 ? '+' : ''}{d.cum.toLocaleString()} kcal cumulative
                   </div>
                   {d.daily != null && (
-                    <div style={{ color: dailyIsLoss ? 'var(--green)' : 'var(--coral)' }}>
+                    <div style={{ color: dailyIsLoss ? 'var(--green)' : 'var(--clay)' }}>
                       Today: {d.daily >= 0 ? '+' : ''}{d.daily.toLocaleString()} kcal
                     </div>
                   )}
@@ -143,10 +143,10 @@ export default function WeightLossChart() {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  statsRow: { display: 'flex', alignItems: 'center', gap: 0, marginBottom: 12, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: '12px 16px' },
+  statsRow: { display: 'flex', alignItems: 'center', gap: 0, marginBottom: 12, background: 'var(--surface)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-card)', padding: '12px 16px' },
   stat: { display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 },
-  statLabel: { color: 'var(--text-muted)', fontSize: 11, marginTop: 2 },
-  statDivider: { width: 1, height: 32, background: 'var(--border)', margin: '0 8px' },
+  statLabel: { color: 'var(--text-mid)', fontSize: 11, marginTop: 2 },
+  statDivider: { width: 1, height: 32, background: 'var(--hairline)', margin: '0 8px' },
   rangeRow: { display: 'flex', gap: '4px', marginBottom: '12px' },
-  rangeBtn: { padding: '4px 10px', borderRadius: 'var(--radius)', fontSize: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.1s' },
+  rangeBtn: { padding: '4px 10px', borderRadius: 'var(--r-chip)', fontSize: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.1s' },
 };

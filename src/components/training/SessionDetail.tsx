@@ -51,7 +51,7 @@ export default function SessionDetail() {
 
       {confirmDelete && (
         <div style={styles.confirmBanner}>
-          <span style={{ color: 'var(--coral)' }}>Delete this session?</span>
+          <span style={{ color: 'var(--clay)' }}>Delete this session?</span>
           <button style={styles.confirmYes} onClick={handleDelete}>Delete</button>
           <button style={styles.confirmNo} onClick={() => setConfirmDelete(false)}>Cancel</button>
         </div>
@@ -82,11 +82,11 @@ export default function SessionDetail() {
                 <div style={styles.cardStats}>
                   <span>{el.sets.length} set{el.sets.length !== 1 ? 's' : ''}</span>
                   {max ? (
-                    <span style={{ color: 'var(--cyan)' }}>
+                    <span style={{ color: 'var(--blue)' }}>
                       MAX: {formatWeight(max.weight_kg, 'kg')} × {max.reps}
                     </span>
                   ) : prev ? (
-                    <span style={{ color: 'var(--cyan)' }}>
+                    <span style={{ color: 'var(--blue)' }}>
                       Prev: {formatWeight(toKg(prev.weight, prev.weight_unit), prev.weight_unit)} × {prev.reps}
                     </span>
                   ) : null}
@@ -115,36 +115,36 @@ const styles: Record<string, React.CSSProperties> = {
   page: { display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' },
   header: {
     display: 'flex', alignItems: 'center', gap: '8px',
-    padding: '12px 16px', borderBottom: '1px solid var(--border)',
+    padding: '12px 16px', borderBottom: '1px solid var(--hairline)',
     background: 'var(--surface)', flexShrink: 0,
   },
-  back: { fontSize: '22px', color: 'var(--text-muted)', padding: '4px 8px' },
+  back: { fontSize: '22px', color: 'var(--text-mid)', padding: '4px 8px' },
   dateRow: { flex: 1 },
-  dateInput: { background: 'transparent', border: 'none', color: 'var(--text)', fontSize: '15px', fontWeight: 600 },
-  deleteBtn: { fontSize: '18px', padding: '4px 8px', color: 'var(--text-muted)' },
+  dateInput: { background: 'transparent', border: 'none', color: 'var(--text-hi)', fontSize: '15px', fontWeight: 600 },
+  deleteBtn: { fontSize: '18px', padding: '4px 8px', color: 'var(--text-mid)' },
   confirmBanner: {
     display: 'flex', alignItems: 'center', gap: '12px',
-    padding: '12px 16px', background: 'var(--surface2)', borderBottom: '1px solid var(--border)',
+    padding: '12px 16px', background: 'var(--surface-2)', borderBottom: '1px solid var(--hairline)',
     fontSize: '14px', flexShrink: 0,
   },
-  confirmYes: { padding: '6px 14px', background: 'var(--coral)', color: '#0a0a0c', borderRadius: 'var(--radius)', fontWeight: 700, fontSize: '13px' },
-  confirmNo: { padding: '6px 14px', border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: '13px', color: 'var(--text-muted)' },
+  confirmYes: { padding: '6px 14px', background: 'var(--clay)', color: 'var(--bg-0)', borderRadius: 'var(--r-pill)', fontWeight: 600, fontSize: '13px' },
+  confirmNo: { padding: '6px 14px', border: '1px solid var(--hairline)', borderRadius: 'var(--r-chip)', fontSize: '13px', color: 'var(--text-mid)' },
   list: { flex: 1, overflowY: 'auto', padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: '8px' },
   card: {
     position: 'relative', padding: '14px',
-    background: 'var(--surface)', border: '1px solid var(--border)',
-    borderRadius: 'var(--radius)', textAlign: 'left', width: '100%',
+    background: 'var(--surface)', border: '1px solid var(--hairline)',
+    borderRadius: 'var(--r-chip)', textAlign: 'left', width: '100%',
   },
   cardTop: { display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' },
-  exName: { fontSize: '16px', fontWeight: 600, color: 'var(--text)' },
-  flame: { fontSize: '11px', fontWeight: 700, color: 'var(--green)', textShadow: 'var(--glow-green)' },
-  cardSub: { fontSize: '12px', color: 'var(--text-muted)', marginBottom: '6px' },
-  cardStats: { display: 'flex', gap: '16px', fontSize: '13px', color: 'var(--text-muted)' },
-  chevron: { position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', fontSize: '20px', color: 'var(--text-muted)' },
+  exName: { fontSize: '16px', fontWeight: 600, color: 'var(--text-hi)' },
+  flame: { fontSize: '11px', fontWeight: 700, color: 'var(--green)'},
+  cardSub: { fontSize: '12px', color: 'var(--text-mid)', marginBottom: '6px' },
+  cardStats: { display: 'flex', gap: '16px', fontSize: '13px', color: 'var(--text-mid)' },
+  chevron: { position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', fontSize: '20px', color: 'var(--text-mid)' },
   addBtn: {
     margin: '12px 16px', padding: '12px',
-    background: 'var(--purple)', color: '#0a0a0c',
-    fontWeight: 700, borderRadius: 'var(--radius)', fontSize: '15px', flexShrink: 0,
+    background: 'var(--teal)', color: 'var(--bg-0)',
+    fontWeight: 600, borderRadius: 'var(--r-pill)', fontSize: '15px', flexShrink: 0,
   },
-  empty: { color: 'var(--text-muted)', textAlign: 'center', padding: '40px 0' },
+  empty: { color: 'var(--text-mid)', textAlign: 'center', padding: '40px 0' },
 };

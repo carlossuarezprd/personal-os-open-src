@@ -11,19 +11,18 @@ export default function TickItem({ label, note, checked, onToggle }: Props) {
       onClick={onToggle}
       style={{
         ...styles.row,
-        background: checked ? 'rgba(167,139,250,0.07)' : 'transparent',
+        background: checked ? 'rgba(79,182,188,.08)' : 'transparent',
       }}
       aria-pressed={checked}
     >
       <span style={{
         ...styles.check,
-        color: checked ? 'var(--purple)' : 'var(--border)',
-        textShadow: checked ? 'var(--glow-purple)' : 'none',
+        color: checked ? 'var(--teal)' : 'var(--text-low)',
       }}>
         {checked ? '✓' : '○'}
       </span>
       <span style={styles.labelWrap}>
-        <span style={{ color: checked ? 'var(--text)' : 'var(--text-muted)' }}>{label}</span>
+        <span style={{ color: checked ? 'var(--text-hi)' : 'var(--text-mid)' }}>{label}</span>
         {note && <span style={styles.note}>{note}</span>}
       </span>
     </button>
@@ -37,7 +36,7 @@ const styles: Record<string, React.CSSProperties> = {
     gap: '12px',
     width: '100%',
     padding: '10px 16px',
-    borderRadius: 'var(--radius)',
+    borderRadius: 'var(--r-chip)',
     textAlign: 'left',
     transition: 'background 0.12s',
     border: 'none',
@@ -47,7 +46,7 @@ const styles: Record<string, React.CSSProperties> = {
     lineHeight: 1,
     marginTop: '1px',
     flexShrink: 0,
-    transition: 'color 0.12s, text-shadow 0.12s',
+    transition: 'color 0.12s',
   },
   labelWrap: {
     display: 'flex',
@@ -56,7 +55,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   note: {
     fontSize: '11px',
-    color: 'var(--text-muted)',
+    color: 'var(--text-mid)',
     lineHeight: 1.4,
   },
 };

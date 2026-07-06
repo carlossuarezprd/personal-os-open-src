@@ -76,7 +76,7 @@ export default function HistoryModal({ date, onClose, onRestore }: Props) {
           <p style={styles.error}>
             Could not load history: {error}
             <br />
-            <span style={{ color: 'var(--text-muted)' }}>
+            <span style={{ color: 'var(--text-mid)' }}>
               If the daily_logs_history table doesn't exist yet, run migrations/002_daily_logs_history.sql in Supabase.
             </span>
           </p>
@@ -121,10 +121,11 @@ export default function HistoryModal({ date, onClose, onRestore }: Props) {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  backdrop: { position: 'fixed', inset: 0, background: '#0008', zIndex: 300, display: 'flex', alignItems: 'flex-end' },
+  backdrop: { position: 'fixed', inset: 0, background: 'rgba(8,9,11,.66)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', zIndex: 300, display: 'flex', alignItems: 'flex-end' },
   sheet: {
-    background: 'var(--surface)',
-    borderRadius: '16px 16px 0 0',
+    background: 'var(--bg-1)',
+    borderTop: '1px solid var(--hairline)',
+    borderRadius: 'var(--r-hero) var(--r-hero) 0 0',
     padding: '12px 16px 32px',
     width: '100%',
     maxHeight: '80dvh',
@@ -133,11 +134,11 @@ const styles: Record<string, React.CSSProperties> = {
     gap: '8px',
     overflow: 'hidden',
   },
-  handle: { width: '36px', height: '4px', background: 'var(--border)', borderRadius: '2px', alignSelf: 'center', marginBottom: '4px' },
+  handle: { width: '36px', height: '4px', background: 'var(--hairline)', borderRadius: '2px', alignSelf: 'center', marginBottom: '4px' },
   header: { display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' },
-  title: { fontSize: '18px', fontWeight: 700, color: 'var(--text)' },
-  dateLabel: { fontSize: '13px', color: 'var(--text-muted)' },
-  hint: { fontSize: '11px', color: 'var(--text-muted)', marginBottom: '4px' },
+  title: { fontSize: '18px', fontWeight: 700, color: 'var(--text-hi)' },
+  dateLabel: { fontSize: '13px', color: 'var(--text-mid)' },
+  hint: { fontSize: '11px', color: 'var(--text-mid)', marginBottom: '4px' },
   list: { overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px' },
   row: {
     display: 'grid',
@@ -145,26 +146,26 @@ const styles: Record<string, React.CSSProperties> = {
     gap: '10px',
     alignItems: 'center',
     padding: '10px 12px',
-    background: 'var(--surface2)',
-    border: '1px solid var(--border)',
-    borderRadius: 'var(--radius)',
+    background: 'var(--surface-2)',
+    border: '1px solid var(--hairline)',
+    borderRadius: 'var(--r-chip)',
   },
   rowMain: { display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 },
-  label: { fontSize: '14px', color: 'var(--text)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
-  sub: { fontSize: '11px', color: 'var(--text-muted)' },
+  label: { fontSize: '14px', color: 'var(--text-hi)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+  sub: { fontSize: '11px', color: 'var(--text-mid)' },
   tab: { textTransform: 'capitalize' },
   values: { display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', whiteSpace: 'nowrap' },
-  prev: { color: 'var(--text-muted)' },
-  arrow: { color: 'var(--text-muted)' },
-  now: { color: 'var(--text)', fontWeight: 600 },
+  prev: { color: 'var(--text-mid)' },
+  arrow: { color: 'var(--text-mid)' },
+  now: { color: 'var(--text-hi)', fontWeight: 600 },
   restoreBtn: {
     padding: '6px 12px',
-    background: 'var(--purple)',
-    color: '#0a0a0c',
-    fontWeight: 700,
-    borderRadius: 'var(--radius)',
+    background: 'var(--teal)',
+    color: 'var(--bg-0)',
+    fontWeight: 600,
+    borderRadius: 'var(--r-pill)',
     fontSize: '12px',
   },
-  empty: { color: 'var(--text-muted)', textAlign: 'center', padding: '40px 0' },
-  error: { color: 'var(--coral)', fontSize: '13px', padding: '12px', background: 'var(--surface2)', borderRadius: 'var(--radius)' },
+  empty: { color: 'var(--text-mid)', textAlign: 'center', padding: '40px 0' },
+  error: { color: 'var(--clay)', fontSize: '13px', padding: '12px', background: 'var(--surface-2)', borderRadius: 'var(--r-chip)' },
 };

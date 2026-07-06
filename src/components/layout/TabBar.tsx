@@ -1,24 +1,28 @@
 import { NavLink } from 'react-router-dom';
+import { CheckCircleIcon, DumbbellIcon, TrendIcon, HeartIcon, SlidersIcon } from '../ui/Icons';
 
 const tabs = [
-  { to: '/logging',   label: 'Tracker',  icon: '✓' },
-  { to: '/training',  label: 'Train',    icon: '💪' },
-  { to: '/stats',     label: 'Stats',    icon: '📈' },
-  { to: '/health',    label: 'Health',   icon: '🫀' },
-  { to: '/settings',  label: 'Settings', icon: '⚙' },
+  { to: '/logging',  label: 'Tracker',  Icon: CheckCircleIcon },
+  { to: '/training', label: 'Train',    Icon: DumbbellIcon },
+  { to: '/stats',    label: 'Stats',    Icon: TrendIcon },
+  { to: '/health',   label: 'Health',   Icon: HeartIcon },
+  { to: '/settings', label: 'Settings', Icon: SlidersIcon },
 ];
 
 export default function TabBar() {
   return (
     <nav style={styles.bar}>
-      {tabs.map(t => (
+      {tabs.map(({ to, label, Icon }) => (
         <NavLink
-          key={t.to}
-          to={t.to}
-          style={({ isActive }) => ({ ...styles.tab, color: isActive ? 'var(--purple)' : 'var(--text-muted)' })}
+          key={to}
+          to={to}
+          style={({ isActive }) => ({
+            ...styles.tab,
+            color: isActive ? 'var(--text-hi)' : 'var(--text-low)',
+          })}
         >
-          <span style={styles.icon}>{t.icon}</span>
-          <span style={styles.label}>{t.label}</span>
+          <Icon size={22} />
+          <span>{label}</span>
         </NavLink>
       ))}
     </nav>
@@ -28,15 +32,20 @@ export default function TabBar() {
 const styles: Record<string, React.CSSProperties> = {
   bar: {
     position: 'fixed',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 'var(--tab-bar-h)',
-    background: 'var(--surface)',
-    borderTop: '1px solid var(--border)',
+    left: '12px',
+    right: '12px',
+    bottom: 'calc(12px + env(safe-area-inset-bottom))',
+    height: '64px',
+    maxWidth: '420px',
+    margin: '0 auto',
+    background: 'rgba(20, 24, 29, .92)',
+    border: '1px solid var(--hairline)',
+    borderRadius: 'var(--r-pill)',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
     display: 'flex',
     alignItems: 'stretch',
-    paddingBottom: 'env(safe-area-inset-bottom)',
+    padding: '0 8px',
     zIndex: 100,
   },
   tab: {
@@ -45,16 +54,11 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '2px',
+    gap: '3px',
     textDecoration: 'none',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.03em',
-    transition: 'color 0.15s',
+    letterSpacing: '.04em',
+    transition: 'color .2s var(--ease)',
   },
-  icon: {
-    fontSize: '18px',
-    lineHeight: 1,
-  },
-  label: {},
 };

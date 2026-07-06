@@ -36,8 +36,8 @@ export default function WeeklyProgressTabs() {
             key={t.id}
             style={{
               ...styles.subTab,
-              color: active === t.id ? 'var(--purple)' : 'var(--text-muted)',
-              borderBottom: active === t.id ? '2px solid var(--purple)' : '2px solid transparent',
+              color: active === t.id ? 'var(--text-hi)' : 'var(--text-low)',
+              borderBottom: active === t.id ? '2px solid var(--teal)' : '2px solid transparent',
             }}
             onClick={() => setActive(t.id)}
           >
@@ -52,8 +52,8 @@ export default function WeeklyProgressTabs() {
             key={String(r.value)}
             style={{
               ...styles.rangeBtn,
-              background: range === r.value ? 'var(--surface2)' : 'transparent',
-              color: range === r.value ? 'var(--purple)' : 'var(--text-muted)',
+              background: range === r.value ? 'var(--surface-2)' : 'transparent',
+              color: range === r.value ? 'var(--text-hi)' : 'var(--text-low)',
               fontWeight: range === r.value ? 700 : 400,
             }}
             onClick={() => setRange(r.value)}
@@ -77,7 +77,7 @@ const styles: Record<string, React.CSSProperties> = {
     display: 'flex',
     overflowX: 'auto',
     scrollbarWidth: 'none',
-    borderBottom: '1px solid var(--border)',
+    borderBottom: '1px solid var(--hairline)',
     marginBottom: '12px',
     gap: '4px',
   },
@@ -93,5 +93,5 @@ const styles: Record<string, React.CSSProperties> = {
     transition: 'color 0.15s',
   },
   rangeRow: { display: 'flex', gap: '4px', marginBottom: '12px' },
-  rangeBtn: { padding: '4px 10px', borderRadius: 'var(--radius)', fontSize: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.1s' },
+  rangeBtn: { padding: '4px 10px', borderRadius: 'var(--r-chip)', fontSize: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.1s' },
 };

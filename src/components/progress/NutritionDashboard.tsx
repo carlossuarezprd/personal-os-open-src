@@ -9,7 +9,7 @@ type View = typeof VIEWS[number];
 export default function NutritionDashboard({ range }: { range: RangeWeeks }) {
   const { days, loading } = useDailyData();
   const [view, setView] = useState<View>('Balance');
-  if (loading) return <p style={{ color: 'var(--text-muted)' }}>Loading…</p>;
+  if (loading) return <p style={{ color: 'var(--text-mid)' }}>Loading…</p>;
 
   const weeks = filterWeeks(groupByWeek(days), range);
   if (weeks.length === 0) return noData();
@@ -36,7 +36,7 @@ export default function NutritionDashboard({ range }: { range: RangeWeeks }) {
     <div>
       <div style={styles.toggle}>
         {VIEWS.map(v => (
-          <button key={v} style={{ ...styles.toggleBtn, background: view === v ? 'var(--surface2)' : 'transparent', color: view === v ? 'var(--purple)' : 'var(--text-muted)' }} onClick={() => setView(v)}>{v}</button>
+          <button key={v} style={{ ...styles.toggleBtn, background: view === v ? 'var(--surface-2)' : 'transparent', color: view === v ? 'var(--text-hi)' : 'var(--text-low)' }} onClick={() => setView(v)}>{v}</button>
         ))}
       </div>
 
@@ -49,9 +49,9 @@ export default function NutritionDashboard({ range }: { range: RangeWeeks }) {
               <SoftGrid />
               <XAxis dataKey="label" {...axisProps} />
               <YAxis {...axisProps} />
-              <ReferenceLine y={0} stroke="var(--border)" strokeDasharray="4 3" />
+              <ReferenceLine y={0} stroke="var(--hairline)" strokeDasharray="4 3" />
               <Tooltip content={<ChartTooltip unit=" kcal" />} />
-              <Line dataKey="balance" name="Balance" stroke="var(--purple)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line dataKey="balance" name="Balance" stroke="var(--teal)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
             </LineChart>
           </ChartCard>
         );
@@ -66,7 +66,7 @@ export default function NutritionDashboard({ range }: { range: RangeWeeks }) {
               <XAxis dataKey="label" {...axisProps} />
               <YAxis {...axisProps} />
               <Tooltip content={<ChartTooltip unit=" kcal" />} />
-              <Line dataKey="calories" name="Calories" stroke="var(--yellow)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line dataKey="calories" name="Calories" stroke="var(--amber)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
             </LineChart>
           </ChartCard>
         );
@@ -81,7 +81,7 @@ export default function NutritionDashboard({ range }: { range: RangeWeeks }) {
               <XAxis dataKey="label" {...axisProps} />
               <YAxis {...axisProps} unit="g" />
               <Tooltip content={<ChartTooltip unit="g" />} />
-              <Line dataKey="protein" name="Protein" stroke="var(--cyan)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line dataKey="protein" name="Protein" stroke="var(--blue)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
             </LineChart>
           </ChartCard>
         );
@@ -96,7 +96,7 @@ export default function NutritionDashboard({ range }: { range: RangeWeeks }) {
               <XAxis dataKey="label" {...axisProps} />
               <YAxis {...axisProps} unit="L" />
               <Tooltip content={<ChartTooltip unit="L" />} />
-              <Line dataKey="water" name="Water" stroke="var(--cyan)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line dataKey="water" name="Water" stroke="var(--blue)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
             </LineChart>
           </ChartCard>
         );
@@ -111,7 +111,7 @@ export default function NutritionDashboard({ range }: { range: RangeWeeks }) {
               <XAxis dataKey="label" {...axisProps} />
               <YAxis {...axisProps} unit="mg" />
               <Tooltip content={<ChartTooltip unit="mg" />} />
-              <Line dataKey="caffeine" name="Caffeine" stroke="var(--yellow)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line dataKey="caffeine" name="Caffeine" stroke="var(--amber)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
             </LineChart>
           </ChartCard>
         );
@@ -122,5 +122,5 @@ export default function NutritionDashboard({ range }: { range: RangeWeeks }) {
 
 const styles: Record<string, React.CSSProperties> = {
   toggle: { display: 'flex', gap: '4px', marginBottom: '12px', flexWrap: 'wrap' },
-  toggleBtn: { padding: '5px 12px', borderRadius: 'var(--radius)', fontSize: '12px', border: 'none', cursor: 'pointer', fontWeight: 600 },
+  toggleBtn: { padding: '5px 12px', borderRadius: 'var(--r-chip)', fontSize: '12px', border: 'none', cursor: 'pointer', fontWeight: 600 },
 };

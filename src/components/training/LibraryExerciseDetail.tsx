@@ -48,8 +48,8 @@ export default function LibraryExerciseDetail() {
           {heaviest?.date && <span style={styles.bannerDate}>{heaviest.date}</span>}
         </div>
         <div style={styles.banner}>
-          <span style={{ ...styles.bannerLabel, color: 'var(--purple)', textShadow: 'var(--glow-purple)' }}>1RM (est.)</span>
-          <span style={{ ...styles.bannerValue, color: 'var(--purple)' }}>
+          <span style={{ ...styles.bannerLabel, color: 'var(--teal)'}}>1RM (est.)</span>
+          <span style={{ ...styles.bannerValue, color: 'var(--teal)' }}>
             {e1rm ? formatWeight(e1rm.e1rm_kg, unit) : '—'}
           </span>
           {e1rm && (
@@ -67,8 +67,8 @@ export default function LibraryExerciseDetail() {
             key={u}
             style={{
               ...styles.unitBtn,
-              background: unit === u ? 'var(--purple)' : 'var(--surface2)',
-              color: unit === u ? '#0a0a0c' : 'var(--text-muted)',
+              background: unit === u ? 'var(--teal)' : 'var(--surface-2)',
+              color: unit === u ? 'var(--bg-0)' : 'var(--text-mid)',
             }}
             onClick={() => setUnit(u)}
           >
@@ -92,10 +92,10 @@ export default function LibraryExerciseDetail() {
 
 const styles: Record<string, React.CSSProperties> = {
   page: { display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto' },
-  header: { display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 16px', borderBottom: '1px solid var(--border)', background: 'var(--surface)', flexShrink: 0 },
-  back: { fontSize: '15px', color: 'var(--text-muted)', padding: '4px 8px' },
-  exName: { fontSize: '17px', fontWeight: 700, color: 'var(--text)' },
-  exSub: { fontSize: '12px', color: 'var(--text-muted)' },
+  header: { display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 16px', borderBottom: '1px solid var(--hairline)', background: 'var(--surface)', flexShrink: 0 },
+  back: { fontSize: '15px', color: 'var(--text-mid)', padding: '4px 8px' },
+  exName: { fontSize: '17px', fontWeight: 700, color: 'var(--text-hi)' },
+  exSub: { fontSize: '12px', color: 'var(--text-mid)' },
   banners: { display: 'flex', gap: '8px', padding: '12px 16px' },
   banner: {
     flex: 1,
@@ -103,15 +103,15 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: 'column',
     gap: '2px',
     background: 'var(--surface)',
-    border: '1px solid var(--border)',
-    borderRadius: 'var(--radius)',
+    border: '1px solid var(--hairline)',
+    borderRadius: 'var(--r-chip)',
     padding: '10px 12px',
   },
-  bannerLabel: { fontSize: '10px', fontWeight: 700, color: 'var(--cyan)', textShadow: 'var(--glow-cyan)', letterSpacing: '0.08em' },
-  bannerValue: { fontSize: '15px', color: 'var(--cyan)', fontWeight: 600 },
-  bannerDate: { fontSize: '11px', color: 'var(--text-muted)' },
+  bannerLabel: { fontSize: '10px', fontWeight: 700, color: 'var(--blue)', letterSpacing: '0.08em' },
+  bannerValue: { fontSize: '15px', color: 'var(--blue)', fontWeight: 600 },
+  bannerDate: { fontSize: '11px', color: 'var(--text-mid)' },
   unitRow: { display: 'flex', gap: '6px', padding: '0 16px 8px' },
-  unitBtn: { padding: '5px 14px', borderRadius: 'var(--radius)', fontSize: '13px', fontWeight: 600, border: 'none' },
+  unitBtn: { padding: '5px 14px', borderRadius: 'var(--r-chip)', fontSize: '13px', fontWeight: 600, border: 'none' },
   chartWrap: { padding: '0 8px 16px' },
-  empty: { color: 'var(--text-muted)', textAlign: 'center', padding: '40px 16px', fontSize: '13px', lineHeight: 1.5 },
+  empty: { color: 'var(--text-mid)', textAlign: 'center', padding: '40px 16px', fontSize: '13px', lineHeight: 1.5 },
 };

@@ -75,7 +75,7 @@ export default function SlipFlag() {
 
   const totalSlips = morning.length + night.length + stretch.length + weekly.length;
 
-  if (loading) return <p style={{ color: 'var(--text-muted)' }}>Loading…</p>;
+  if (loading) return <p style={{ color: 'var(--text-mid)' }}>Loading…</p>;
 
   return (
     <div>
@@ -83,8 +83,8 @@ export default function SlipFlag() {
       <div style={styles.weekNav}>
         <button style={styles.navBtn} onClick={() => setWeekStart(prev => addDays(prev, -7))}>‹</button>
         <div style={styles.weekLabel}>
-          <span style={{ color: 'var(--text)', fontWeight: 600 }}>{weekStart} – {weekEnd}</span>
-          {!complete && <span style={{ color: 'var(--text-muted)', fontSize: 11, marginLeft: 6 }}>in progress</span>}
+          <span style={{ color: 'var(--text-hi)', fontWeight: 600 }}>{weekStart} – {weekEnd}</span>
+          {!complete && <span style={{ color: 'var(--text-mid)', fontSize: 11, marginLeft: 6 }}>in progress</span>}
         </div>
         <button
           style={{ ...styles.navBtn, opacity: weekEnd >= today ? 0.3 : 1, cursor: weekEnd >= today ? 'default' : 'pointer' }}
@@ -93,14 +93,14 @@ export default function SlipFlag() {
       </div>
 
       {weekDays.length === 0 ? (
-        <p style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '20px 0', fontSize: 13 }}>No data logged for this week</p>
+        <p style={{ color: 'var(--text-mid)', textAlign: 'center', padding: '20px 0', fontSize: 13 }}>No data logged for this week</p>
       ) : totalSlips === 0 ? (
         <div style={styles.allGood}>
           <div style={{ fontSize: 32 }}>✓</div>
           <div style={{ color: 'var(--green)', fontWeight: 700, marginTop: 8 }}>
             {complete ? 'Perfect week!' : 'On track so far'}
           </div>
-          <div style={{ color: 'var(--text-muted)', fontSize: 13, marginTop: 4 }}>No slips detected</div>
+          <div style={{ color: 'var(--text-mid)', fontSize: 13, marginTop: 4 }}>No slips detected</div>
         </div>
       ) : (
         <div>
@@ -130,15 +130,15 @@ function SlipGroup({ title, items }: { title: string; items: SlipItem[] }) {
 
 const styles: Record<string, React.CSSProperties> = {
   weekNav:   { display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 },
-  navBtn:    { width: 32, height: 32, borderRadius: 'var(--radius)', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text)', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  navBtn:    { width: 32, height: 32, borderRadius: 'var(--r-chip)', border: '1px solid var(--hairline)', background: 'var(--surface)', color: 'var(--text-hi)', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' },
   weekLabel: { flex: 1, textAlign: 'center', fontSize: 13 },
   allGood:   { textAlign: 'center', padding: '32px 0' },
 };
 
 const groupStyles: Record<string, React.CSSProperties> = {
-  container: { background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', marginBottom: 12, overflow: 'hidden' },
-  header:    { fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', padding: '10px 14px', borderBottom: '1px solid var(--border)', background: 'var(--surface2)' },
-  row:       { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 14px', borderBottom: '1px solid var(--border)' },
-  label:     { fontSize: 13, fontWeight: 600, color: 'var(--text)' },
-  detail:    { fontSize: 12, color: 'var(--coral)', fontWeight: 600 },
+  container: { background: 'var(--surface)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-card)', marginBottom: 12, overflow: 'hidden' },
+  header:    { fontSize: 11, fontWeight: 700, color: 'var(--text-mid)', textTransform: 'uppercase', letterSpacing: '0.06em', padding: '10px 14px', borderBottom: '1px solid var(--hairline)', background: 'var(--surface-2)' },
+  row:       { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 14px', borderBottom: '1px solid var(--hairline)' },
+  label:     { fontSize: 13, fontWeight: 600, color: 'var(--text-hi)' },
+  detail:    { fontSize: 12, color: 'var(--clay)', fontWeight: 600 },
 };

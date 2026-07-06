@@ -26,8 +26,8 @@ function addDays(dateStr: string, n: number) {
 
 function adherenceColor(pct: number): string {
   if (pct >= 80) return 'var(--green)';
-  if (pct >= 50) return 'var(--yellow)';
-  return 'var(--coral)';
+  if (pct >= 50) return 'var(--amber)';
+  return 'var(--clay)';
 }
 
 export default function HabitAdherence() {
@@ -75,7 +75,7 @@ export default function HabitAdherence() {
     }).filter(d => d.pct != null);
   }, [filteredDays, trendGroup, today]);
 
-  if (loading) return <p style={{ color: 'var(--text-muted)' }}>Loading…</p>;
+  if (loading) return <p style={{ color: 'var(--text-mid)' }}>Loading…</p>;
 
   return (
     <div>
@@ -86,8 +86,8 @@ export default function HabitAdherence() {
             key={r.value}
             style={{
               ...styles.rangeBtn,
-              background: rangeKind === r.value ? 'var(--surface2)' : 'transparent',
-              color: rangeKind === r.value ? 'var(--purple)' : 'var(--text-muted)',
+              background: rangeKind === r.value ? 'var(--surface-2)' : 'transparent',
+              color: rangeKind === r.value ? 'var(--text-hi)' : 'var(--text-low)',
               fontWeight: rangeKind === r.value ? 700 : 400,
             }}
             onClick={() => setRangeKind(r.value)}
@@ -111,14 +111,14 @@ export default function HabitAdherence() {
       )}
 
       <div style={styles.rangeSummary}>
-        Showing <span style={{ color: 'var(--text)' }}>{rangeStart === '0000-01-01' ? 'all data' : `${rangeStart} → ${rangeEnd}`}</span>
+        Showing <span style={{ color: 'var(--text-hi)' }}>{rangeStart === '0000-01-01' ? 'all data' : `${rangeStart} → ${rangeEnd}`}</span>
         {filteredDays.length > 0 && ` · ${filteredDays.length} days`}
       </div>
 
       {/* View toggle */}
       <div style={styles.viewRow}>
-        <button style={{ ...styles.viewBtn, background: view === 'summary' ? 'var(--surface2)' : 'transparent', color: view === 'summary' ? 'var(--purple)' : 'var(--text-muted)' }} onClick={() => setView('summary')}>Summary</button>
-        <button style={{ ...styles.viewBtn, background: view === 'trend' ? 'var(--surface2)' : 'transparent', color: view === 'trend' ? 'var(--purple)' : 'var(--text-muted)' }} onClick={() => setView('trend')}>Trend</button>
+        <button style={{ ...styles.viewBtn, background: view === 'summary' ? 'var(--surface-2)' : 'transparent', color: view === 'summary' ? 'var(--text-hi)' : 'var(--text-low)' }} onClick={() => setView('summary')}>Summary</button>
+        <button style={{ ...styles.viewBtn, background: view === 'trend' ? 'var(--surface-2)' : 'transparent', color: view === 'trend' ? 'var(--text-hi)' : 'var(--text-low)' }} onClick={() => setView('trend')}>Trend</button>
       </div>
 
       {filteredDays.length === 0 ? noData() : view === 'summary' ? (
@@ -126,7 +126,7 @@ export default function HabitAdherence() {
           <BarChart data={summary} layout="vertical" margin={{ left: 80, right: 20 }}>
             <SoftGrid />
             <XAxis type="number" domain={[0, 100]} {...axisProps} unit="%" />
-            <YAxis type="category" dataKey="name" tick={{ fill: 'var(--text-muted)', fontSize: 11 }} width={80} tickLine={false} axisLine={false} />
+            <YAxis type="category" dataKey="name" tick={{ fill: 'var(--text-mid)', fontSize: 11 }} width={80} tickLine={false} axisLine={false} />
             <Tooltip formatter={(v: unknown) => [`${v}%`, 'Adherence']} />
             <Bar dataKey="pct" isAnimationActive={false} radius={[0, 4, 4, 0]}>
               {summary.map((d, i) => <Cell key={i} fill={adherenceColor(d.pct)} />)}
@@ -139,7 +139,7 @@ export default function HabitAdherence() {
             {ADHERENCE_GROUPS.map(g => (
               <button
                 key={g.name}
-                style={{ ...styles.groupBtn, background: trendGroup === g.name ? 'var(--surface2)' : 'transparent', color: trendGroup === g.name ? 'var(--purple)' : 'var(--text-muted)' }}
+                style={{ ...styles.groupBtn, background: trendGroup === g.name ? 'var(--surface-2)' : 'transparent', color: trendGroup === g.name ? 'var(--text-hi)' : 'var(--text-low)' }}
                 onClick={() => setTrendGroup(g.name)}
               >
                 {g.name}
@@ -153,7 +153,7 @@ export default function HabitAdherence() {
                 <XAxis dataKey="label" {...axisProps} />
                 <YAxis {...axisProps} domain={[0, 100]} unit="%" />
                 <Tooltip formatter={(v: unknown) => [`${v}%`]} />
-                <Line dataKey="pct" name="Adherence" stroke="var(--purple)" strokeWidth={2} dot={{ r: 3, fill: 'var(--purple)' }} connectNulls />
+                <Line dataKey="pct" name="Adherence" stroke="var(--teal)" strokeWidth={2} dot={{ r: 3, fill: 'var(--teal)' }} connectNulls />
               </LineChart>
             </ChartCard>
           )}
@@ -169,13 +169,13 @@ void isoWeekKey;
 
 const styles: Record<string, React.CSSProperties> = {
   rangeRow:     { display: 'flex', gap: '4px', marginBottom: '8px', flexWrap: 'wrap' },
-  rangeBtn:     { padding: '5px 12px', borderRadius: 'var(--radius)', fontSize: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.1s' },
+  rangeBtn:     { padding: '5px 12px', borderRadius: 'var(--r-chip)', fontSize: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.1s' },
   customRow:    { display: 'flex', gap: '12px', marginBottom: '8px', flexWrap: 'wrap' },
-  dateLabel:    { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '11px', color: 'var(--text-muted)' },
-  dateInput:    { padding: '5px 8px', fontSize: '13px', borderRadius: 'var(--radius)', color: 'var(--text)', background: 'var(--surface2)', border: '1px solid var(--border)' },
-  rangeSummary: { fontSize: '12px', color: 'var(--text-muted)', marginBottom: '12px' },
+  dateLabel:    { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '11px', color: 'var(--text-mid)' },
+  dateInput:    { padding: '5px 8px', fontSize: '13px', borderRadius: 'var(--r-chip)', color: 'var(--text-hi)', background: 'var(--surface-2)', border: '1px solid var(--hairline)' },
+  rangeSummary: { fontSize: '12px', color: 'var(--text-mid)', marginBottom: '12px' },
   viewRow:      { display: 'flex', gap: '6px', marginBottom: '12px' },
-  viewBtn:      { padding: '5px 14px', borderRadius: 'var(--radius)', fontSize: '13px', border: 'none', cursor: 'pointer', fontWeight: 600 },
+  viewBtn:      { padding: '5px 14px', borderRadius: 'var(--r-chip)', fontSize: '13px', border: 'none', cursor: 'pointer', fontWeight: 600 },
   groupPicker:  { display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '12px' },
-  groupBtn:     { padding: '4px 10px', borderRadius: 'var(--radius)', fontSize: '12px', border: 'none', cursor: 'pointer', fontWeight: 600 },
+  groupBtn:     { padding: '4px 10px', borderRadius: 'var(--r-chip)', fontSize: '12px', border: 'none', cursor: 'pointer', fontWeight: 600 },
 };

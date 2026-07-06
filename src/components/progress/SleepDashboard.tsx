@@ -9,7 +9,7 @@ export default function SleepDashboard({ range }: { range: RangeWeeks }) {
   const { days, loading } = useDailyData();
   const [view, setView] = useState<'Totals' | 'Efficiency'>('Totals');
 
-  if (loading) return <p style={{ color: 'var(--text-muted)' }}>Loading…</p>;
+  if (loading) return <p style={{ color: 'var(--text-mid)' }}>Loading…</p>;
 
   const weeks = filterWeeks(groupByWeek(days), range);
   if (weeks.length === 0) return noData();
@@ -38,7 +38,7 @@ export default function SleepDashboard({ range }: { range: RangeWeeks }) {
     <div>
       <div style={styles.toggle}>
         {VIEWS.map(v => (
-          <button key={v} style={{ ...styles.toggleBtn, background: view === v ? 'var(--surface2)' : 'transparent', color: view === v ? 'var(--purple)' : 'var(--text-muted)' }} onClick={() => setView(v)}>{v}</button>
+          <button key={v} style={{ ...styles.toggleBtn, background: view === v ? 'var(--surface-2)' : 'transparent', color: view === v ? 'var(--text-hi)' : 'var(--text-low)' }} onClick={() => setView(v)}>{v}</button>
         ))}
       </div>
 
@@ -50,10 +50,10 @@ export default function SleepDashboard({ range }: { range: RangeWeeks }) {
               <XAxis dataKey="label" {...axisProps} />
               <YAxis {...axisProps} unit="h" />
               <Tooltip content={<ChartTooltip unit="h" />} />
-              <Legend wrapperStyle={{ fontSize: 12, color: 'var(--text-muted)' }} />
-              <Line dataKey="inBed" name="In bed" stroke="var(--text-muted)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
-              <Line dataKey="sleep" name="Sleep" stroke="var(--cyan)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
-              <Line dataKey="restorative" name="Restorative" stroke="var(--purple)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Legend wrapperStyle={{ fontSize: 12, color: 'var(--text-mid)' }} />
+              <Line dataKey="inBed" name="In bed" stroke="var(--text-mid)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line dataKey="sleep" name="Sleep" stroke="var(--blue)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line dataKey="restorative" name="Restorative" stroke="var(--teal)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
             </LineChart>
           </ChartCard>
         )
@@ -65,9 +65,9 @@ export default function SleepDashboard({ range }: { range: RangeWeeks }) {
               <XAxis dataKey="label" {...axisProps} />
               <YAxis {...axisProps} unit="%" domain={[0, 100]} />
               <Tooltip content={<ChartTooltip unit="%" />} />
-              <Legend wrapperStyle={{ fontSize: 12, color: 'var(--text-muted)' }} />
-              <Line dataKey="sleepEff" name="Sleep eff" stroke="var(--cyan)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
-              <Line dataKey="restEff" name="Restorative eff" stroke="var(--purple)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Legend wrapperStyle={{ fontSize: 12, color: 'var(--text-mid)' }} />
+              <Line dataKey="sleepEff" name="Sleep eff" stroke="var(--blue)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
+              <Line dataKey="restEff" name="Restorative eff" stroke="var(--teal)" strokeWidth={2} dot={{ r: 3 }} connectNulls />
             </LineChart>
           </ChartCard>
         )
@@ -78,5 +78,5 @@ export default function SleepDashboard({ range }: { range: RangeWeeks }) {
 
 const styles: Record<string, React.CSSProperties> = {
   toggle: { display: 'flex', gap: '6px', marginBottom: '12px' },
-  toggleBtn: { padding: '5px 14px', borderRadius: 'var(--radius)', fontSize: '13px', border: 'none', cursor: 'pointer', fontWeight: 600 },
+  toggleBtn: { padding: '5px 14px', borderRadius: 'var(--r-chip)', fontSize: '13px', border: 'none', cursor: 'pointer', fontWeight: 600 },
 };

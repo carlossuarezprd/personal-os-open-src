@@ -56,8 +56,8 @@ export default function SleepDebtChart() {
     });
   }, [days, settings, range]);
 
-  if (daysLoading || setLoading) return <p style={{ color: 'var(--text-muted)' }}>Loading…</p>;
-  if (chartData.length === 0) return <p style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '20px 0' }}>No data yet</p>;
+  if (daysLoading || setLoading) return <p style={{ color: 'var(--text-mid)' }}>Loading…</p>;
+  if (chartData.length === 0) return <p style={{ color: 'var(--text-mid)', textAlign: 'center', padding: '20px 0' }}>No data yet</p>;
 
   const maxVal = Math.max(...chartData.map(d => d.cum), 0);
   const minVal = Math.min(...chartData.map(d => d.cum), 0);
@@ -70,10 +70,10 @@ export default function SleepDebtChart() {
   return (
     <div>
       <div style={styles.summary}>
-        <span style={{ color: currentDebt >= 0 ? 'var(--cyan)' : 'var(--coral)', fontWeight: 700, fontSize: 20 }}>
+        <span style={{ color: currentDebt >= 0 ? 'var(--blue)' : 'var(--clay)', fontWeight: 700, fontSize: 20 }}>
           {fmtMinHM(currentDebt)}
         </span>
-        <span style={{ color: 'var(--text-muted)', fontSize: 13, marginLeft: 8 }}>
+        <span style={{ color: 'var(--text-mid)', fontSize: 13, marginLeft: 8 }}>
           {currentDebt >= 0 ? 'surplus' : 'debt'} · target{' '}
         </span>
         {editingTarget ? (
@@ -110,7 +110,7 @@ export default function SleepDebtChart() {
         {RANGES.map(r => (
           <button
             key={String(r.value)}
-            style={{ ...styles.rangeBtn, background: range === r.value ? 'var(--surface2)' : 'transparent', color: range === r.value ? 'var(--purple)' : 'var(--text-muted)', fontWeight: range === r.value ? 700 : 400 }}
+            style={{ ...styles.rangeBtn, background: range === r.value ? 'var(--surface-2)' : 'transparent', color: range === r.value ? 'var(--text-hi)' : 'var(--text-low)', fontWeight: range === r.value ? 700 : 400 }}
             onClick={() => setRange(r.value)}
           >
             {r.label}
@@ -122,12 +122,12 @@ export default function SleepDebtChart() {
         <AreaChart data={chartData} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
           <defs>
             <linearGradient id="sleepGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset={zeroFraction} stopColor="var(--cyan)" stopOpacity={0.45} />
-              <stop offset={zeroFraction} stopColor="var(--coral)" stopOpacity={0.45} />
+              <stop offset={zeroFraction} stopColor="var(--blue)" stopOpacity={0.45} />
+              <stop offset={zeroFraction} stopColor="var(--clay)" stopOpacity={0.45} />
             </linearGradient>
             <linearGradient id="sleepStroke" x1="0" y1="0" x2="0" y2="1">
-              <stop offset={zeroFraction} stopColor="var(--cyan)" stopOpacity={1} />
-              <stop offset={zeroFraction} stopColor="var(--coral)" stopOpacity={1} />
+              <stop offset={zeroFraction} stopColor="var(--blue)" stopOpacity={1} />
+              <stop offset={zeroFraction} stopColor="var(--clay)" stopOpacity={1} />
             </linearGradient>
           </defs>
           <XAxis dataKey="label" {...axisProps} interval="preserveStartEnd" />
@@ -136,19 +136,19 @@ export default function SleepDebtChart() {
             width={56}
             tickFormatter={(v: number) => fmtMinHM(v)}
           />
-          <ReferenceLine y={0} stroke="var(--border)" strokeDasharray="4 3" />
+          <ReferenceLine y={0} stroke="var(--hairline)" strokeDasharray="4 3" />
           <Tooltip
             content={({ active, payload }) => {
               if (!active || !payload?.length) return null;
               const d = payload[0].payload;
               return (
-                <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '8px 12px', fontSize: 12 }}>
-                  <div style={{ color: 'var(--text-muted)', marginBottom: 4 }}>{d.date}</div>
-                  <div style={{ color: d.cum >= 0 ? 'var(--cyan)' : 'var(--coral)', fontWeight: 600 }}>
+                <div style={{ background: 'var(--surface)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-chip)', padding: '8px 12px', fontSize: 12 }}>
+                  <div style={{ color: 'var(--text-mid)', marginBottom: 4 }}>{d.date}</div>
+                  <div style={{ color: d.cum >= 0 ? 'var(--blue)' : 'var(--clay)', fontWeight: 600 }}>
                     {fmtMinHM(d.cum)} cumulative {d.cum >= 0 ? '(surplus)' : '(debt)'}
                   </div>
                   {d.delta != null && (
-                    <div style={{ color: 'var(--text-muted)' }}>
+                    <div style={{ color: 'var(--text-mid)' }}>
                       Today: {fmtMinHM(d.delta)}
                     </div>
                   )}
@@ -174,8 +174,8 @@ export default function SleepDebtChart() {
 
 const styles: Record<string, React.CSSProperties> = {
   summary: { marginBottom: 12, display: 'flex', alignItems: 'center', flexWrap: 'wrap' },
-  targetBtn: { background: 'none', border: 'none', cursor: 'pointer', color: 'var(--purple)', fontSize: 13, fontWeight: 600, padding: '0 2px', textDecoration: 'underline dotted' },
-  targetInput: { width: 56, background: 'var(--surface2)', border: '1px solid var(--purple)', borderRadius: 'var(--radius)', color: 'var(--text)', fontSize: 13, padding: '2px 6px', outline: 'none' },
+  targetBtn: { background: 'none', border: 'none', cursor: 'pointer', color: 'var(--teal)', fontSize: 13, fontWeight: 600, padding: '0 2px', textDecoration: 'underline dotted' },
+  targetInput: { width: 56, background: 'var(--surface-2)', border: '1px solid var(--teal)', borderRadius: 'var(--r-chip)', color: 'var(--text-hi)', fontSize: 13, padding: '2px 6px', outline: 'none' },
   rangeRow: { display: 'flex', gap: '4px', marginBottom: '12px' },
-  rangeBtn: { padding: '4px 10px', borderRadius: 'var(--radius)', fontSize: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.1s' },
+  rangeBtn: { padding: '4px 10px', borderRadius: 'var(--r-chip)', fontSize: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.1s' },
 };

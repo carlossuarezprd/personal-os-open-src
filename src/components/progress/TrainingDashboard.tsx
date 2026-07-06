@@ -7,15 +7,16 @@ import { toKg } from '../../lib/maxCalc';
 const VIEWS = ['Sessions', 'Volume'] as const;
 type View = typeof VIEWS[number];
 
+// Data viz stays in the cool, equal-lightness accent family (blue-led)
 const MUSCLE_COLORS = [
-  'var(--purple)', 'var(--cyan)', 'var(--green)', 'var(--yellow)',
-  'var(--coral)', 'var(--pink)', '#60a5fa', '#34d399',
+  'var(--blue)', 'var(--teal)', 'var(--green)', 'var(--blue-lite)',
+  'var(--amber)', 'var(--clay)', 'var(--blue-deep)', 'var(--teal-deep)',
 ];
 
 export default function TrainingDashboard({ range }: { range: RangeWeeks }) {
   const { sessions, loading } = useTrainingData();
   const [view, setView] = useState<View>('Sessions');
-  if (loading) return <p style={{ color: 'var(--text-muted)' }}>Loading…</p>;
+  if (loading) return <p style={{ color: 'var(--text-mid)' }}>Loading…</p>;
   if (sessions.length === 0) return noData();
 
   // Sessions per week
@@ -53,7 +54,7 @@ export default function TrainingDashboard({ range }: { range: RangeWeeks }) {
     <div>
       <div style={styles.toggle}>
         {VIEWS.map(v => (
-          <button key={v} style={{ ...styles.toggleBtn, background: view === v ? 'var(--surface2)' : 'transparent', color: view === v ? 'var(--purple)' : 'var(--text-muted)' }} onClick={() => setView(v)}>{v}</button>
+          <button key={v} style={{ ...styles.toggleBtn, background: view === v ? 'var(--surface-2)' : 'transparent', color: view === v ? 'var(--text-hi)' : 'var(--text-low)' }} onClick={() => setView(v)}>{v}</button>
         ))}
       </div>
 
@@ -64,7 +65,7 @@ export default function TrainingDashboard({ range }: { range: RangeWeeks }) {
             <XAxis dataKey="label" {...axisProps} />
             <YAxis {...axisProps} allowDecimals={false} />
             <Tooltip />
-            <Line dataKey="sessions" name="Sessions" stroke="var(--purple)" strokeWidth={2} dot={{ r: 3 }} isAnimationActive={false} connectNulls />
+            <Line dataKey="sessions" name="Sessions" stroke="var(--teal)" strokeWidth={2} dot={{ r: 3 }} isAnimationActive={false} connectNulls />
           </LineChart>
         </ChartCard>
       )}
@@ -76,7 +77,7 @@ export default function TrainingDashboard({ range }: { range: RangeWeeks }) {
             <XAxis dataKey="label" {...axisProps} />
             <YAxis {...axisProps} />
             <Tooltip />
-            <Legend wrapperStyle={{ fontSize: 11, color: 'var(--text-muted)' }} />
+            <Legend wrapperStyle={{ fontSize: 11, color: 'var(--text-mid)' }} />
             {muscleNames.map((m, i) => (
               <Line key={m} dataKey={m} name={m} stroke={MUSCLE_COLORS[i % MUSCLE_COLORS.length]} strokeWidth={2} dot={{ r: 3 }} isAnimationActive={false} connectNulls />
             ))}
@@ -89,5 +90,5 @@ export default function TrainingDashboard({ range }: { range: RangeWeeks }) {
 
 const styles: Record<string, React.CSSProperties> = {
   toggle: { display: 'flex', gap: '6px', marginBottom: '12px' },
-  toggleBtn: { padding: '5px 14px', borderRadius: 'var(--radius)', fontSize: '13px', border: 'none', cursor: 'pointer', fontWeight: 600 },
+  toggleBtn: { padding: '5px 14px', borderRadius: 'var(--r-chip)', fontSize: '13px', border: 'none', cursor: 'pointer', fontWeight: 600 },
 };

@@ -20,8 +20,8 @@ export default function HealthCenterPage() {
             key={t.id}
             style={{
               ...styles.tab,
-              color: active === t.id ? 'var(--purple)' : 'var(--text-muted)',
-              borderBottom: active === t.id ? '2px solid var(--purple)' : '2px solid transparent',
+              color: active === t.id ? 'var(--text-hi)' : 'var(--text-low)',
+              borderBottom: active === t.id ? '2px solid var(--teal)' : '2px solid transparent',
             }}
             onClick={() => setActive(t.id)}
           >
@@ -42,8 +42,7 @@ const styles: Record<string, React.CSSProperties> = {
   page: { display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' },
   tabs: {
     display: 'flex',
-    borderBottom: '1px solid var(--border)',
-    background: 'var(--surface)',
+    borderBottom: '1px solid var(--hairline)',
     flexShrink: 0,
   },
   tab: {

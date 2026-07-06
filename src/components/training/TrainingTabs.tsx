@@ -14,17 +14,17 @@ export default function TrainingTabs() {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  row: { display: 'flex', gap: '4px', background: 'var(--surface2)', padding: '4px', borderRadius: 'var(--radius)', alignSelf: 'flex-start' },
+  row: { display: 'flex', gap: '4px', border: '1px solid var(--hairline)', padding: '4px', borderRadius: 'var(--r-pill)', alignSelf: 'flex-start' },
   tab: {
     padding: '6px 14px',
     fontSize: '13px',
     fontWeight: 600,
-    color: 'var(--text-muted)',
-    borderRadius: 'var(--radius)',
+    color: 'var(--text-low)',
+    borderRadius: 'var(--r-pill)',
+    transition: 'color .2s var(--ease), background .2s var(--ease)',
   },
   active: {
-    background: 'var(--purple)',
-    color: '#0a0a0c',
-    boxShadow: 'var(--glow-purple)',
+    background: 'var(--surface-2)',
+    color: 'var(--text-hi)',
   },
 };

@@ -4,42 +4,82 @@
   padding: 0;
 }
 
+/* ────────────────────────────────────────────────────────────────
+   Nocturne — Oura-inspired design language (design spec §09)
+   dark canvas only · 1px hairline borders, no drop-shadows ·
+   one hero per screen · serif for headlines, sans for data ·
+   scores = big+light with hairline ring · gradients are generated,
+   blurred, teal/blue/green · motion eases 400–800ms, nothing snaps
+   ──────────────────────────────────────────────────────────────── */
+
 :root {
-  --bg:        #0a0a0c;
-  --surface:   #161619;
-  --surface2:  #1e1e23;
-  --border:    #2a2a30;
-  --text:      #e2e2e8;
-  --text-muted: #6b6b7a;
+  /* surfaces */
+  --bg-0: #08090B;
+  --bg-1: #101317;
+  --surface: #14181D;
+  --surface-2: #1C2127;
+  --hairline: rgba(255, 255, 255, .06);
+  --hairline-hover: rgba(255, 255, 255, .12);
 
-  /* Neon accents */
-  --purple:    #39ff14;
-  --cyan:      #7dd3fc;
-  --green:     #86efac;
-  --yellow:    #fde047;
-  --coral:     #fca5a5;
-  --pink:      #f9a8d4;
+  /* ink */
+  --text-hi: #EDEFF2;
+  --text-mid: #9BA3AC;
+  --text-low: #626A73;
 
-  /* Glow helpers */
-  --glow-purple: 0 0 8px #39ff1488;
-  --glow-cyan:   0 0 8px #7dd3fc88;
-  --glow-green:  0 0 8px #86efac88;
-  --glow-yellow: 0 0 8px #fde04788;
-  --glow-coral:  0 0 8px #fca5a588;
+  /* accents (OKLCH ~0.72L 0.09C — keep new hues on the same ring) */
+  --teal: #4FB6BC;  --teal-deep: #2E7E86;
+  --blue: #5E93D6;  --blue-deep: #37578C;  --blue-lite: #7FB0E8;
+  --green: #57BE97; --green-deep: #2E7A63;
+  --amber: #E3B778; --clay: #C77B6B;
 
-  --radius:    8px;
-  --radius-lg: 14px;
-  --tab-bar-h: 60px;
-  --sidebar-w: 220px;
+  /* status */
+  --st-optimal: #57BE97;
+  --st-good: #4FB6BC;
+  --st-attention: #E3B778;
+  --st-care: #C77B6B;
+
+  /* radius */
+  --r-chip: 10px;
+  --r-card: 16px;
+  --r-hero: 24px;
+  --r-pill: 999px;
+
+  /* space (4px base) */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px;
+  --s6: 24px; --s8: 32px; --s12: 48px;
+
+  /* type */
+  --font-sans: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* motion */
+  --ease: cubic-bezier(.22, .61, .36, 1);
+
+  /* layout */
+  --tab-bar-h: 88px;   /* floating pill + its inset clearance */
+  --sidebar-w: 240px;
 }
 
 html, body, #root {
   height: 100%;
-  background: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  color: var(--text-hi);
+  font-family: var(--font-sans);
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
+}
+
+html {
+  background: var(--bg-0);
+}
+
+body {
+  /* near-black, faintly cool canvas that lets gradients glow */
+  background: radial-gradient(120% 80% at 50% -10%, #0E1418 0%, var(--bg-0) 55%);
+}
+
+::selection {
+  background: rgba(79, 182, 188, .3);
 }
 
 button {
@@ -53,23 +93,56 @@ button {
 input, textarea, select {
   font: inherit;
   color: inherit;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-chip);
   outline: none;
+  transition: border-color .2s var(--ease);
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: var(--purple);
-  box-shadow: var(--glow-purple);
+  border-color: rgba(79, 182, 188, .55);
 }
 
 a {
-  color: var(--purple);
+  color: var(--teal);
   text-decoration: none;
 }
 
-/* Scrollbar */
+/* Scrollbar — hairline, quiet */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: var(--hairline-hover); border-radius: 2px; }
+
+/* ─── Motion ─────────────────────────────────────────────────────
+   Screen change: cross-fade + 8px rise, 400ms. No hard cuts. */
+@keyframes screen-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+.screen-in {
+  animation: screen-in .4s var(--ease);
+}
+
+/* Aurora gradients slowly drift/rotate (20–40s loop) */
+@keyframes aurora-drift {
+  from { transform: rotate(0turn); }
+  to   { transform: rotate(1turn); }
+}
+
+/* Hover on cards/rows: border 6% → 12% white, 200ms. No lift.
+   (!important needed to win over inline border shorthand) */
+.hover-hairline {
+  transition: border-color .2s var(--ease);
+}
+.hover-hairline:hover {
+  border-color: var(--hairline-hover) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

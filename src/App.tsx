@@ -13,7 +13,7 @@ const SettingsPage = lazy(() => import('./components/settings/SettingsPage'));
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { session, loading } = useAuth();
-  if (loading) return <div style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>Loading…</div>;
+  if (loading) return <div style={{ padding: '40px', textAlign: 'center', color: 'var(--text-mid)' }}>Loading…</div>;
   if (!session) return <Navigate to="/login" replace />;
   return <>{children}</>;
 }
